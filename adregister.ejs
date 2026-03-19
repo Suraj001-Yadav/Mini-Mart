@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Register - Ultra ULTRA NEON</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+
+    /* ====== Cosmic starry background ====== */
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(ellipse at center, #0a0a1c 0%, #0f043f 100%);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Orbitron', sans-serif;
+      color: #ddd;
+      user-select: none;
+      perspective: 900px;
+      position: relative;
+    }
+
+    /* Star layers with twinkle pulse */
+    .stars, .stars2, .stars3 {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: block;
+      background-repeat: repeat;
+      background-position: 0 0;
+      z-index: 0;
+      pointer-events: none;
+      animation-timing-function: linear;
+    }
+    .stars {
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: star-move 200s linear infinite;
+      opacity: 0.6;
+      animation-name: star-move, star-twinkle;
+      animation-duration: 200s, 8s;
+      animation-iteration-count: infinite, infinite;
+      animation-timing-function: linear, ease-in-out;
+    }
+    .stars2 {
+      background-image: radial-gradient(white 2px, transparent 2px);
+      background-size: 80px 80px;
+      animation: star-move 400s linear infinite reverse, star-twinkle 6s ease-in-out infinite alternate;
+      opacity: 0.4;
+    }
+    .stars3 {
+      background-image: radial-gradient(white 1.5px, transparent 1.5px);
+      background-size: 20px 20px;
+      animation: star-move 100s linear infinite, star-twinkle 5s ease-in-out infinite alternate;
+      opacity: 0.25;
+    }
+    @keyframes star-move {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 10000px; }
+    }
+    @keyframes star-twinkle {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ====== Frosted glass neon card container ====== */
+    .neon-card {
+      position: relative;
+      background: rgba(15, 5, 63, 0.45);
+      border-radius: 2.5rem;
+      max-width: 440px;
+      width: 100%;
+      padding: 3.5rem 4rem;
+      box-shadow:
+        0 0 15px #a259ff,
+        0 0 35px #8b5cf6,
+        0 0 50px #c084fc,
+        inset 0 0 70px #a78bfa80;
+      overflow: hidden;
+      z-index: 2;
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+      cursor: grab;
+    }
+    .neon-card:active {
+      cursor: grabbing;
+    }
+    /* Pulsing neon glow behind the card */
+    .neon-card::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -40%;
+      width: 180%;
+      height: 180%;
+      background: linear-gradient(270deg, #c084fc, #7c3aed, #a78bfa, #c084fc);
+      background-size: 800% 800%;
+      animation: pulse-gradient 10s ease infinite;
+      filter: blur(45px);
+      opacity: 0.5;
+      z-index: 0;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    @keyframes pulse-gradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Glitch flicker effect on heading */
+    .neon-heading {
+      font-size: 4rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #c084fc;
+      text-shadow:
+        0 0 7px #c084fc,
+        0 0 20px #8b5cf6,
+        0 0 40px #7c3aed,
+        0 0 70px #a78bfa;
+      position: relative;
+      animation: flicker 2.4s infinite alternate;
+      letter-spacing: 0.15em;
+      user-select: none;
+      text-transform: uppercase;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 40px #c084fc; }
+      50% { opacity: 0.7; text-shadow: 0 0 10px #a078ff; }
+    }
+
+    /* Glitch scanline overlay on form */
+    .scanline-overlay {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.04),
+          rgba(255,255,255,0.04) 1px,
+          transparent 2px,
+          transparent 4px
+        );
+      z-index: 10;
+      animation: scanline-move 4s linear infinite;
+      mix-blend-mode: overlay;
+      border-radius: 2.5rem;
+    }
+    @keyframes scanline-move {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    /* Form styling */
+    form {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Inputs with neon animated border and vertical scanline highlight */
+    input {
+      width: 100%;
+      background: rgba(25, 12, 70, 0.3);
+      border: 2px solid #4c1d95;
+      border-radius: 1rem;
+      padding: 1rem 1.4rem;
+      margin-bottom: 1.8rem;
+      font-size: 1.25rem;
+      color: #ddd;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 6px #7c3aed80;
+      outline-offset: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      user-select: text;
+    }
+    input::placeholder {
+      color: #b3a1ffcc;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    input:focus {
+      border-color: #c084fc;
+      box-shadow:
+        0 0 12px #c084fc,
+        0 0 30px #a78bfa,
+        0 0 50px #7c3aed;
+      outline: none;
+    }
+    /* Neon vertical sweep on focus */
+    input:focus::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      animation: sweep 1.2s ease forwards;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes sweep {
+      to {
+        left: 100%;
+      }
+    }
+
+    /* Button with neon pulse and ripple */
+    button {
+      width: 100%;
+      padding: 1.4rem 0;
+      background: linear-gradient(270deg, #a78bfa, #7c3aed, #c084fc, #a78bfa);
+      background-size: 800% 800%;
+      border-radius: 2rem;
+      font-weight: 900;
+      font-size: 1.45rem;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      box-shadow:
+        0 0 10px #c084fc,
+        0 0 30px #7c3aed,
+        0 0 60px #a78bfa;
+      animation: button-glow 6s ease infinite;
+      transition: box-shadow 0.3s ease, transform 0.15s ease;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+    button:hover {
+      box-shadow:
+        0 0 20px #c084fc,
+        0 0 40px #7c3aed,
+        0 0 90px #a78bfa;
+      animation-play-state: paused;
+      background-position: 100% 50%;
+      transform: scale(1.05);
+    }
+    button:active {
+      transform: scale(0.9);
+    }
+    @keyframes button-glow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Ripple effect on button click */
+    button.ripple::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.2);
+      animation: ripple-effect 0.6s ease-out forwards;
+      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      z-index: 1;
+    }
+    @keyframes ripple-effect {
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Login link */
+    .login-link {
+      display: block;
+      text-align: center;
+      margin-top: 3rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #b3a1ff;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      user-select: none;
+      text-transform: uppercase;
+    }
+    .login-link:hover {
+      color: #d0bfff;
+      text-shadow: 0 0 10px #c084fc;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Star layers -->
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <section class="neon-card" role="main" aria-label="Admin Register Form">
+    <div class="scanline-overlay"></div>
+
+    <h1 class="neon-heading" data-text="ADMIN REGISTER">ADMIN REGISTER</h1>
+
+    <form action="/adregister" method="POST" autocomplete="off" novalidate>
+      <input name="name" type="text" placeholder="Name" required autocomplete="name" aria-label="Name" />
+      <input name="email" type="email" placeholder="Email" required autocomplete="email" aria-label="Email" />
+      <input name="password" type="password" placeholder="Password" required autocomplete="new-password" aria-label="Password" />
+      <input name="confirmPassword" type="password" placeholder="Confirm Password" required autocomplete="new-password" aria-label="Confirm Password" />
+      <button type="submit" aria-label="Register Admin Account">Register</button>
+    </form>
+
+    <a href="/adlogin" class="login-link" aria-label="Admin Login">Already have an account? Login here</a>
+  </section>
+
+  <script>
+    // 3D card tilt effect on mouse move
+    const card = document.querySelector('.neon-card');
+    let mouseX = 0;
+    let mouseY = 0;
+
+    function onMouseMove(e) {
+      const rect = card.getBoundingClientRect();
+      mouseX = e.clientX - rect.left - rect.width / 2;
+      mouseY = e.clientY - rect.top - rect.height / 2;
+
+      const rotateX = (-mouseY / rect.height) * 15; // max 15deg tilt
+      const rotateY = (mouseX / rect.width) * 15;
+
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    }
+
+    function onMouseLeave() {
+      card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+    }
+
+    card.addEventListener('mousemove', onMouseMove);
+    card.addEventListener('mouseleave', onMouseLeave);
+
+    // Ripple effect on button click
+    const button = card.querySelector('button');
+    button.addEventListener('click', (e) => {
+      if(button.classList.contains('ripple')) return; // prevent multiple ripples
+      button.classList.add('ripple');
+      setTimeout(() => button.classList.remove('ripple'), 600);
+    });
+  </script>
+</body>
+</html>

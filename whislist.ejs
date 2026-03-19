@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Wishlist</title>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheet/Whilist.css" />
+
+    <script
+      src="https://kit.fontawesome.com/9088cc6401.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="shortcut icon"
+      type="image/jpg"
+      href="C:\Users\hp\Desktop\College\First Semester\Introduction To Web Technologies\Notepad ++ Files\Project\favicon.ico"
+    />
+  </head>
+
+  <body>
+    <%-  include('./partials/header') %>
+    <div class="container">
+      <h1>Wishlist</h1>
+
+      <div class="cart">
+        <div class="products">
+          <div class="product">
+            <img src="/image/Pens.jpg" />
+
+            <div class="product-info">
+              <h3 class="product-name">Pens</h3>
+
+              <h4 class="product-price">Rs. 167</h4>
+
+              <h4 class="product-offer">50%</h4>
+
+              <p class="product-quantity">
+                Qnt:
+
+                <input value="1" name="" />
+              </p>
+
+              <p class="product-remove">
+                <i class="fas fa-trash-alt"></i>
+
+                <span class="remove"> Remove </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="product">
+            <img src="/image/images/pack1.png" />
+
+            <div class="product-info">
+              <h3 class="product-name">Lemon, Tomato, Potato,+4</h3>
+
+              <h4 class="product-price">Rs. 500</h4>
+
+              <h4 class="product-offer">20%</h4>
+
+              <p class="product-quantity">
+                Qnt:
+
+                <input value="1" name="" />
+              </p>
+              <p class="product-remove">
+                <i class="fas fa-trash-alt"></i>
+
+                <span class="remove"> Remove </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-total">
+          <p>
+            <span> Total Price </span>
+
+            <span> Rs. 183 </span>
+          </p>
+          <p>
+            <span> No. of Items </span>
+
+            <span> 2 </span>
+          </p>
+
+          <p>
+            <span> You Save </span>
+
+            <span> Rs. 177 </span>
+          </p>
+
+          <a href="Details For Checkout HTML.html"> Buy Now </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

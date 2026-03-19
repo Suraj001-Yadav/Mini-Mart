@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Register - MiniMart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    background: #0f111a;
+    font-family: 'Orbitron', sans-serif;
+    color: #0ef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    background: #121629;
+    padding: 3rem 2.5rem;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow:
+      0 0 10px #0ef,
+      inset 0 0 30px #0ef22,
+      0 0 40px #0ef44;
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  input {
+    background: #1a1f36;
+    border: 2px solid #0ef;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    color: #0ef;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input::placeholder {
+    color: #0efaa;
+    font-style: italic;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #0ff;
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    background: #131a2e;
+  }
+
+  button {
+    margin-top: 2rem;
+    background: linear-gradient(45deg, #0ff, #00ccff);
+    border: none;
+    border-radius: 25px;
+    padding: 16px 0;
+    color: #0a0a0a;
+    font-weight: 700;
+    font-size: 1.3rem;
+    cursor: pointer;
+    text-shadow: 0 0 5px #0ff;
+    box-shadow: 0 0 15px #00ccff, 0 0 30px #0ff inset;
+    transition: background 0.4s ease, box-shadow 0.3s ease;
+  }
+
+  button:hover {
+    background: linear-gradient(45deg, #00ccff, #0ff);
+    box-shadow: 0 0 30px #00ccff, 0 0 50px #0ff inset;
+  }
+
+  .footer-text {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #0affffcc;
+  }
+
+  .footer-text a {
+    color: #0ff;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1.5px dotted #0ff;
+    transition: color 0.3s ease;
+  }
+
+  .footer-text a:hover {
+    color: #00ccff;
+    text-shadow: 0 0 10px #00ccff;
+  }
+</style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Register to MiniMart">
+    <h2>Create Your Account</h2>
+    <form action="/auth/register" method="POST" novalidate>
+      <input
+        type="text"
+        name="name"
+        placeholder="Full Name"
+        required
+        autocomplete="name"
+        aria-label="Full Name"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email Address"
+        required
+        autocomplete="email"
+        aria-label="Email Address"
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+        autocomplete="new-password"
+        aria-label="Password"
+      />
+      <input
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        required
+        autocomplete="new-password"
+        aria-label="Confirm Password"
+      />
+      <button type="submit">Register</button>
+    </form>
+    <p class="footer-text">
+      Already have an account? <a href="/auth/login">Login here</a>
+    </p>
+  </main>
+</body>
+</html>
